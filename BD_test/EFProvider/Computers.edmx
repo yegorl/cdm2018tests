@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище computerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Laptop">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="speed" Type="smallint" Nullable="false" />
+          <Property Name="ram" Type="smallint" Nullable="false" />
+          <Property Name="hd" Type="real" Nullable="false" />
+          <Property Name="price" Type="money" />
+          <Property Name="screen" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PC">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="speed" Type="smallint" Nullable="false" />
+          <Property Name="ram" Type="smallint" Nullable="false" />
+          <Property Name="hd" Type="real" Nullable="false" />
+          <Property Name="cd" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="price" Type="money" />
+        </EntityType>
+        <EntityType Name="Printer">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="color" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="price" Type="money" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="model" />
+          </Key>
+          <Property Name="maker" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Laptop_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Laptop" Type="Self.Laptop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="model" />
+            </Principal>
+            <Dependent Role="Laptop">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pc_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="PC" Type="Self.PC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="model" />
+            </Principal>
+            <Dependent Role="PC">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Printer" Type="Self.Printer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="model" />
+            </Principal>
+            <Dependent Role="Printer">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище computerModelContainer">
+          <EntitySet Name="Laptop" EntityType="Self.Laptop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PC" EntityType="Self.PC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Printer" EntityType="Self.Printer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Laptop_product" Association="Self.FK_Laptop_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Laptop" EntitySet="Laptop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pc_product" Association="Self.FK_pc_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PC" EntitySet="PC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_product" Association="Self.FK_printer_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Printer" EntitySet="Printer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="computerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Laptop">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="speed" Type="Int16" Nullable="false" />
+          <Property Name="ram" Type="Int16" Nullable="false" />
+          <Property Name="hd" Type="Single" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="screen" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Laptop_product" FromRole="Laptop" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="PC">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="speed" Type="Int16" Nullable="false" />
+          <Property Name="ram" Type="Int16" Nullable="false" />
+          <Property Name="hd" Type="Single" Nullable="false" />
+          <Property Name="cd" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_pc_product" FromRole="PC" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Printer">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_printer_product" FromRole="Printer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="model" />
+          </Key>
+          <Property Name="maker" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Laptop" Relationship="Self.FK_Laptop_product" FromRole="Product" ToRole="Laptop" />
+          <NavigationProperty Name="PC" Relationship="Self.FK_pc_product" FromRole="Product" ToRole="PC" />
+          <NavigationProperty Name="Printer" Relationship="Self.FK_printer_product" FromRole="Product" ToRole="Printer" />
+        </EntityType>
+        <Association Name="FK_Laptop_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Laptop" Type="Self.Laptop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="model" />
+            </Principal>
+            <Dependent Role="Laptop">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pc_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="PC" Type="Self.PC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="model" />
+            </Principal>
+            <Dependent Role="PC">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_printer_product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Printer" Type="Self.Printer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="model" />
+            </Principal>
+            <Dependent Role="Printer">
+              <PropertyRef Name="model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="computers" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Laptop" EntityType="Self.Laptop" />
+          <EntitySet Name="PC" EntityType="Self.PC" />
+          <EntitySet Name="Printer" EntityType="Self.Printer" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <AssociationSet Name="FK_Laptop_product" Association="Self.FK_Laptop_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Laptop" EntitySet="Laptop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pc_product" Association="Self.FK_pc_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PC" EntitySet="PC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_printer_product" Association="Self.FK_printer_product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Printer" EntitySet="Printer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище computerModelContainer" CdmEntityContainer="computers">
+          <EntitySetMapping Name="Laptop">
+            <EntityTypeMapping TypeName="computerModel.Laptop">
+              <MappingFragment StoreEntitySet="Laptop">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="hd" ColumnName="hd" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="screen" ColumnName="screen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PC">
+            <EntityTypeMapping TypeName="computerModel.PC">
+              <MappingFragment StoreEntitySet="PC">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="hd" ColumnName="hd" />
+                <ScalarProperty Name="cd" ColumnName="cd" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Printer">
+            <EntityTypeMapping TypeName="computerModel.Printer">
+              <MappingFragment StoreEntitySet="Printer">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="computerModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="maker" ColumnName="maker" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
