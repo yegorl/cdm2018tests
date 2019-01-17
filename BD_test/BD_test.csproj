@@ -84,7 +84,9 @@
     </Compile>
     <Compile Include="Implementation\EFCodeFirst.cs" />
     <Compile Include="Implementation\EFDBFirst.cs" />
+    <Compile Include="Implementation\TestLaptopProvider.cs" />
     <Compile Include="Interfaces\ILaptopProvider.cs" />
+    <Compile Include="Interfaces\ITestLaptopProvider.cs" />
     <Compile Include="Models\Laptop.cs" />
     <Compile Include="Implementation\LaptopDapper.cs" />
     <Compile Include="Implementation\LaptopDataReader.cs" />
