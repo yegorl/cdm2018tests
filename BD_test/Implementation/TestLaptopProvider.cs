@@ -11,7 +11,18 @@ namespace BD_test.Implementation
     {
         public void AddLaptop(Laptop laptop)
         {
-            throw new NotImplementedException();
+            using (LaptopContext db = new LaptopContext())
+            {
+                try
+                {
+                    db.Laptops.Add(laptop);
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
         }
 
         public bool DeleteLaptop(Laptop laptop)

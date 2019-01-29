@@ -20,7 +20,7 @@ namespace BD_test.Implementation
     //[Table("Laptop")]
     public class Laptop
     {
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int code { get; set; }
         public string model { get; set; }
         public Int16 speed { get; set; }

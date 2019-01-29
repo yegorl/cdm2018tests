@@ -44,10 +44,23 @@ namespace BD_test
             }
             */
             
-            TestProvider(new LaptopDataReader());
-            TestProvider(new LaptopDapper());
-            TestProvider(new EFDBFirst());
+            //TestProvider(new LaptopDataReader());
+            //TestProvider(new LaptopDapper());
+            //TestProvider(new EFDBFirst());
             TestProvider(new EFCodeFirst());
+            var provider= new TestLaptopProvider();
+            provider.AddLaptop(new Laptop()
+            {
+                code = 9,
+                model = "1298",
+                speed = 875,
+                ram = 124,
+                DiscSize = 10,
+                price = 500,
+                screen = 14,
+            });
+
+
             Console.Read();
         }
         static void TestProvider(ILaptopProvider provider)
