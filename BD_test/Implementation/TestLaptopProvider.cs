@@ -1,4 +1,5 @@
 ﻿using BD_test.Interfaces;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BD_test.Implementation
 {
     public class TestLaptopProvider : ITestLaptopProvider
     {
+        private Logger logger = LogManager.GetCurrentClassLogger();
         public void AddLaptop(Laptop laptop)
         {
             using (LaptopContext db = new LaptopContext())
@@ -61,12 +63,12 @@ namespace BD_test.Implementation
 
 
                     Laptop_ = LP.ToList();
+                    logger.Debug("debug message");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: " + e);
-                Console.WriteLine(e.StackTrace);
+                logger.Debug(e);
             }
             return Laptop_;
         }
