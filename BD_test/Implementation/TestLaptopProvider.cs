@@ -1,5 +1,5 @@
 ﻿using BD_test.Interfaces;
-using NLog;
+//using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,18 @@ namespace BD_test.Implementation
 {
     public class TestLaptopProvider : ITestLaptopProvider
     {
-        private Logger logger = LogManager.GetCurrentClassLogger();
+        //private Logger logger = LogManager.GetCurrentClassLogger();
+        LaptopContext ctx;
+
+        private TestLaptopProvider()
+        {
+
+        }
+
+        public TestLaptopProvider(LaptopContext context)
+        {
+            ctx = context;
+        }
         public void AddLaptop(Laptop laptop)
         {
             using (LaptopContext db = new LaptopContext())
@@ -42,10 +53,8 @@ namespace BD_test.Implementation
             List<LaptopModel> Laptop_ = new List<LaptopModel>();
             try
             {
-                using (LaptopContext db = new LaptopContext())
-                {
-                    var Lap = db.Laptops;
-                    var Prod = db.Products;
+                    var Lap = ctx.Laptops;
+                    var Prod = ctx.Products;
                     var LP = Lap.Join(Prod,
                          a => a.model,
                          b => b.model,
@@ -63,12 +72,13 @@ namespace BD_test.Implementation
 
 
                     Laptop_ = LP.ToList();
-                    logger.Debug("debug message");
-                }
+                
+                    //logger.Debug("debug message");
+                
             }
             catch (Exception e)
             {
-                logger.Debug(e);
+               // logger.Debug(e);
             }
             return Laptop_;
         }

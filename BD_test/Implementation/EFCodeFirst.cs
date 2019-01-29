@@ -37,7 +37,7 @@ namespace BD_test.Implementation
         public string model { get; set; }
         public string type { get; set; }
     }
-    class LaptopContext : DbContext
+    public class LaptopContext : DbContext
     {
         public LaptopContext()
             : base("BD_test")
