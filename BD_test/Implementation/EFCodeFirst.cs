@@ -93,5 +93,23 @@ namespace BD_test.Implementation
             }
             return Laptop_;
         }
+
+        public static void RemoveLaptop(string model)
+        {
+            try
+            {
+                using (LaptopContext db = new LaptopContext())
+                {
+                    var Laptop = db.Laptops.FirstOrDefault(m => m.model.Equals(model));
+                    db.Laptops.Remove(Laptop);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
+        }
     }
 }
