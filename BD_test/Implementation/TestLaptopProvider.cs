@@ -40,7 +40,20 @@ namespace BD_test.Implementation
 
         public bool DeleteLaptop(Laptop laptop)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (LaptopContext db = new LaptopContext())
+                {
+                    db.Laptops.Remove(laptop);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
         public Laptop GetLaptop(int code)
@@ -81,25 +94,6 @@ namespace BD_test.Implementation
                // logger.Debug(e);
             }
             return Laptop_;
-        }
-
-
-        public static void RemoveLaptop(string model)
-        {
-            try
-            {
-                using (LaptopContext db = new LaptopContext())
-                {
-                    var Laptop = db.Laptops.FirstOrDefault(m => m.model.Equals(model));
-                    db.Laptops.Remove(Laptop);
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
         }
     }
 }

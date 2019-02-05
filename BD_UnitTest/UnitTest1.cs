@@ -41,17 +41,19 @@ namespace BD_UnitTest
         public void AddItemToDatabase()
         {
             TestLaptopProvider laptopProvider = new TestLaptopProvider(mockLaptopContext.Object);
-            LaptopModel laptop = new LaptopModel()
+            Laptop laptop = new Laptop()
             {
-                Model = "12345",
-                CpuSpeed = 1,
+                model = "12311",
+                code = 1,
                 DiscSize = 1,
-                Price = 100,
-                ProductMaker = "A",
-                RamSize = 2,
-                ScreenSize = 2
+                price = 100,
+                ram = 1,
+                screen = 1,
+                speed = 1
             };
-            var result = laptopProvider.AddLaptop(laptop);
+            laptopProvider.AddLaptop(laptop);
+
+            mockLaptopContext.Verify(x => x.SaveChanges(), Times.Once());
         }
     }
 }
