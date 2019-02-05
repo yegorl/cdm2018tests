@@ -29,8 +29,9 @@ namespace BD_test.Implementation
                 ctx.Laptops.Add(laptop);
                 ctx.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                logger.Debug(e);
                 throw;
             }
             
@@ -46,7 +47,7 @@ namespace BD_test.Implementation
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                logger.Debug(e);
                 return false;
             }
         }
@@ -60,6 +61,7 @@ namespace BD_test.Implementation
             }
             catch(Exception e)
             {
+                logger.Debug(e);
                 throw e;
             }
             return laptop;
@@ -90,7 +92,6 @@ namespace BD_test.Implementation
 
                     Laptop_ = LP.ToList();
                 
-                    logger.Debug("debug message");
                 
             }
             catch (Exception e)
