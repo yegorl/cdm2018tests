@@ -53,7 +53,15 @@ namespace BD_UnitTest
             };
             laptopProvider.AddLaptop(laptop);
 
-            mockLaptopContext.Verify(x => x.SaveChanges(), Times.Once());
+            mockLaptopContext.Verify( x => x.SaveChanges(), Times.Once);
+            Assert.Equals(1, laptops.Count);
+
+        }
+
+        [Test]
+        public void DeleteItemFromDatabase()
+        {
+            
         }
     }
 }

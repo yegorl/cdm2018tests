@@ -45,8 +45,8 @@ namespace BD_test.Implementation
             Database.SetInitializer<LaptopContext>(null);
         }
         
-        public DbSet<Laptop> Laptops { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public virtual DbSet<Laptop> Laptops { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Laptop>().ToTable("Laptop");
