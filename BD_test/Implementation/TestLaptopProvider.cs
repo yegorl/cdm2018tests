@@ -42,12 +42,9 @@ namespace BD_test.Implementation
         {
             try
             {
-                using (LaptopContext db = new LaptopContext())
-                {
-                    db.Laptops.Remove(laptop);
-                    db.SaveChanges();
-                    return true;
-                }
+                ctx.Laptops.Remove(laptop);
+                ctx.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {

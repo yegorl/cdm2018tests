@@ -3,7 +3,6 @@ using NUnit.Framework;
 using Moq;
 using BD_test.Implementation;
 using System.Collections.Generic;
-using BD_test;
 
 namespace BD_UnitTest
 {
@@ -28,6 +27,12 @@ namespace BD_UnitTest
             var result = sut.GetLaptops();
             Assert.NotNull(result);
             Assert.Equals(0, result.Count);
+            
+            /*
+             mockEmailLogService.Verify(x =>
+                x.InsertHistory(It.IsAny<string>(), HistoryType.CustomerArchiveNotificationEmailSent, It.IsAny<int?>(), It.IsAny<object>(),
+                    It.IsAny<string>()), Times.Exactly(1));
+             */
         }
         [Test]
         public void ReturnFalse()
@@ -35,25 +40,6 @@ namespace BD_UnitTest
             var result = false;
 
             Assert.IsFalse(result, "1 should not be prime");
-        }
-
-        [Test]
-        public void AddItemToDatabase()
-        {
-            TestLaptopProvider laptopProvider = new TestLaptopProvider(mockLaptopContext.Object);
-            Laptop laptop = new Laptop()
-            {
-                model = "12311",
-                code = 1,
-                DiscSize = 1,
-                price = 100,
-                ram = 1,
-                screen = 1,
-                speed = 1
-            };
-            laptopProvider.AddLaptop(laptop);
-
-            mockLaptopContext.Verify(x => x.SaveChanges(), Times.Once());
         }
     }
 }
