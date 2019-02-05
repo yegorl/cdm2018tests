@@ -10,13 +10,19 @@ using System.Configuration;
 using System.Data.SqlTypes;
 using Dapper;
 using BD_test.Implementation;
+using NLog;
 
 namespace BD_test
 {
     class Program
     {
+        //private static Logger logger = LogManager.GetCurrentClassLogger();
         static void Main(string[] args)
         {
+            //logger.Debug("debug message");
+
+
+
             /*LaptopDataReader ILaptop = new LaptopDataReader();
             List<Laptop> Lap = new List<Laptop>();
             Lap = ILaptop.GetLaptops();
@@ -44,7 +50,7 @@ namespace BD_test
                 Console.WriteLine(i.Model);
             }
             */
-            
+
             //TestProvider(new LaptopDataReader());
             //TestProvider(new LaptopDapper());
             //TestProvider(new EFDBFirst());

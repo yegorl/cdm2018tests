@@ -24,41 +24,47 @@ namespace BD_test.Implementation
         }
         public void AddLaptop(Laptop laptop)
         {
-            using (LaptopContext db = new LaptopContext())
+            try
             {
-                try
-                {
-                    db.Laptops.Add(laptop);
-                    db.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                ctx.Laptops.Add(laptop);
+                ctx.SaveChanges();
             }
+            catch (Exception e)
+            {
+                logger.Debug(e);
+                throw;
+            }
+            
         }
 
         public bool DeleteLaptop(Laptop laptop)
         {
             try
             {
-                using (LaptopContext db = new LaptopContext())
-                {
-                    db.Laptops.Remove(laptop);
-                    db.SaveChanges();
-                    return true;
-                }
+                ctx.Laptops.Remove(laptop);
+                ctx.SaveChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                logger.Debug(e);
                 return false;
             }
         }
 
         public Laptop GetLaptop(int code)
         {
-            throw new NotImplementedException();
+            Laptop laptop;
+            try
+            {
+                laptop = ctx.Laptops.Find(code);
+            }
+            catch(Exception e)
+            {
+                logger.Debug(e);
+                throw e;
+            }
+            return laptop;
         }
 
         public List<LaptopModel> GetLaptops()
@@ -86,7 +92,6 @@ namespace BD_test.Implementation
 
                     Laptop_ = LP.ToList();
                 
-                    logger.Debug("debug message");
                 
             }
             catch (Exception e)
