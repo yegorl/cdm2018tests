@@ -1,5 +1,10 @@
-﻿using Owin;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.Owin;
+using Owin;
+
+[assembly: OwinStartup(typeof(WepApi_Test.Startup))]
 
 namespace WepApi_Test
 {
@@ -16,8 +21,11 @@ namespace WepApi_Test
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
+         
             appBuilder.UseWebApi(config);
         }
+
     }
 }
+
+
