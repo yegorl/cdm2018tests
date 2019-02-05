@@ -1,5 +1,5 @@
 ﻿using BD_test.Interfaces;
-//using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace BD_test.Implementation
 {
     public class TestLaptopProvider : ITestLaptopProvider
     {
-        //private Logger logger = LogManager.GetCurrentClassLogger();
+        private Logger logger = LogManager.GetCurrentClassLogger();
         LaptopContext ctx;
 
         private TestLaptopProvider()
@@ -86,12 +86,12 @@ namespace BD_test.Implementation
 
                     Laptop_ = LP.ToList();
                 
-                    //logger.Debug("debug message");
+                    logger.Debug("debug message");
                 
             }
             catch (Exception e)
             {
-               // logger.Debug(e);
+                logger.Debug(e);
             }
             return Laptop_;
         }
