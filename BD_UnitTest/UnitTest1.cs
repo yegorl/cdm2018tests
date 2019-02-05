@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Moq;
 using BD_test.Implementation;
 using System.Collections.Generic;
+using BD_test;
 
 namespace BD_UnitTest
 {
@@ -34,6 +35,23 @@ namespace BD_UnitTest
             var result = false;
 
             Assert.IsFalse(result, "1 should not be prime");
+        }
+
+        [Test]
+        public void AddItemToDatabase()
+        {
+            TestLaptopProvider laptopProvider = new TestLaptopProvider(mockLaptopContext.Object);
+            LaptopModel laptop = new LaptopModel()
+            {
+                Model = "12345",
+                CpuSpeed = 1,
+                DiscSize = 1,
+                Price = 100,
+                ProductMaker = "A",
+                RamSize = 2,
+                ScreenSize = 2
+            };
+            var result = laptopProvider.AddLaptop(laptop);
         }
     }
 }
