@@ -24,11 +24,18 @@ namespace BD_test.Implementation
         }
         public void AddLaptop(Laptop laptop)
         {
-            try
-            {
-                ctx.Laptops.Add(laptop);
-                ctx.SaveChanges();
-            }
+            //using (LaptopContext db = new LaptopContext())
+            //{
+                try
+                {
+                    ctx.Laptops.Add(laptop);
+                    ctx.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            //}
             catch (Exception e)
             {
                 logger.Debug(e);
@@ -72,25 +79,23 @@ namespace BD_test.Implementation
             List<LaptopModel> Laptop_ = new List<LaptopModel>();
             try
             {
-                    var Lap = ctx.Laptops;
-                    var Prod = ctx.Products;
-                    var LP = Lap.Join(Prod,
-                         a => a.model,
-                         b => b.model,
-                         (a, b) => new LaptopModel()
-                         {
-                             ProductMaker = b.maker,
-                             Model = a.model,
-                             CpuSpeed = a.speed,
-                             RamSize = a.ram,
-                             DiscSize = a.DiscSize,
-                             Price = a.price,
-                             ScreenSize = a.screen
-                         }
-                    );
-
-
-                    Laptop_ = LP.ToList();
+                var Lap = ctx.Laptops;
+                var Prod = ctx.Products;
+                var LP = Lap.Join(Prod,
+                        a => a.model,
+                        b => b.model,
+                        (a, b) => new LaptopModel()
+                        {
+                            ProductMaker = b.maker,
+                            Model = a.model,
+                            CpuSpeed = a.speed,
+                            RamSize = a.ram,
+                            DiscSize = a.DiscSize,
+                            Price = a.price,
+                            ScreenSize = a.screen
+                        }
+                );
+                Laptop_ = LP.ToList();
                 
                 
             }

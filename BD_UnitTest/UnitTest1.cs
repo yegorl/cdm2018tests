@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Moq;
 using BD_test.Implementation;
 using System.Collections.Generic;
+using System.Data.Entity;
 using BD_test;
 
 namespace BD_UnitTest
@@ -11,6 +12,7 @@ namespace BD_UnitTest
     public class LaptopUnitTest
     {
         private Mock<LaptopContext> mockLaptopContext;
+        private Mock<DbSet<Laptop>> mockLaptopDbSet;
         private List<Laptop> laptops;
 
         [SetUp]
@@ -18,7 +20,9 @@ namespace BD_UnitTest
         {
             laptops = new List<Laptop>();
             mockLaptopContext = new Mock<LaptopContext>();
-            mockLaptopContext.Setup(x => x.Laptops).Returns(MockContextHelper.CreateMock(laptops).Object);
+            mockLaptopDbSet = MockContextHelper.CreateMock(laptops);
+            mockLaptopDbSet.Setup(x => x.Remove(It.IsAny<Laptop>())).Throws(new Exception());
+            mockLaptopContext.Setup(x => x.Laptops).Returns(mockLaptopDbSet.Object);
         }
 
         [Test]
