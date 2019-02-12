@@ -20,12 +20,14 @@ namespace WepApi_Test.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<LaptopModel> Get()
+        public IEnumerable<Laptop> Get()
         {
             return laptopProvider.GetLaptops();
         }
 
-        public Laptop Get(int code)
+        [HttpGet]
+        [Route()]
+        public Laptop GetLaptop([FromUri]int code)
         {
             return laptopProvider.GetLaptop(code);
         }

@@ -67,30 +67,13 @@ namespace BD_test.Implementation
             return laptop;
         }
 
-        public List<LaptopModel> GetLaptops()
+        public List<Laptop> GetLaptops()
         {
-            List<LaptopModel> Laptop_ = new List<LaptopModel>();
+            List<Laptop> Laptop_ = new List<Laptop>();
             try
             {
-                var Lap = ctx.Laptops;
-                var Prod = ctx.Products;
-                var LP = Lap.Join(Prod,
-                        a => a.model,
-                        b => b.model,
-                        (a, b) => new LaptopModel()
-                        {
-                            ProductMaker = b.maker,
-                            Model = a.model,
-                            CpuSpeed = a.speed,
-                            RamSize = a.ram,
-                            DiscSize = a.DiscSize,
-                            Price = a.price,
-                            ScreenSize = a.screen
-                        }
-                );
-                Laptop_ = LP.ToList();
-                
-                
+
+                return ctx.Laptops.ToList();
             }
             catch (Exception e)
             {

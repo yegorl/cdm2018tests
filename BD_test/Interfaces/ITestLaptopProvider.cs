@@ -10,7 +10,7 @@ namespace BD_test.Interfaces
 
     public interface ITestLaptopProvider
     {
-        List<LaptopModel> GetLaptops();
+        List<Laptop> GetLaptops();
         void AddLaptop(Laptop laptop);
         bool DeleteLaptop(Laptop laptop);
         Laptop GetLaptop(int code);
