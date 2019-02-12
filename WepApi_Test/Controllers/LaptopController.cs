@@ -30,8 +30,8 @@ namespace WepApi_Test.Controllers
             return laptopProvider.GetLaptop(code);
         }
 
-         
-        public void Put(Laptop laptop)
+        [HttpPost]
+        public void Post(Laptop laptop)
         {
             laptopProvider.AddLaptop(laptop);
         }
