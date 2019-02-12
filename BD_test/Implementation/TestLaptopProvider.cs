@@ -57,7 +57,7 @@ namespace BD_test.Implementation
             Laptop laptop;
             try
             {
-                laptop = ctx.Laptops.Find(code);
+                laptop = ctx.Laptops.FirstOrDefault(x => x.code == code);
             }
             catch(Exception e)
             {

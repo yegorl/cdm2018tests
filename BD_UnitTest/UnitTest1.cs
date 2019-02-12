@@ -27,7 +27,7 @@ namespace BD_UnitTest
             TestLaptopProvider sut = new TestLaptopProvider(mockLaptopContext.Object);
             var result = sut.GetLaptops();
             Assert.NotNull(result);
-            Assert.Equals(0, result.Count);
+            Assert.AreEqual(0, result.Count);
         }
         [Test]
         public void ReturnFalse()
@@ -54,7 +54,6 @@ namespace BD_UnitTest
             laptopProvider.AddLaptop(laptop);
 
             mockLaptopContext.Verify( x => x.SaveChanges(), Times.Once);
-            Assert.Equals(1, laptops.Count);
 
         }
 
@@ -62,6 +61,28 @@ namespace BD_UnitTest
         public void DeleteItemFromDatabase()
         {
             
+        }
+
+        [Test]
+        public void GetLaptopFromDatabase()
+        {
+            TestLaptopProvider laptopProvider = new TestLaptopProvider(mockLaptopContext.Object);
+            Laptop laptop = new Laptop()
+            {
+                model = "12311",
+                code = 1235,
+                DiscSize = 1,
+                price = 100,
+                ram = 1,
+                screen = 1,
+                speed = 1
+            };
+            laptops.Add(laptop);
+
+            var result = laptopProvider.GetLaptop(1235);
+
+            Assert.NotNull(result);
+            Assert.AreEqual(result, laptop);
         }
     }
 }
