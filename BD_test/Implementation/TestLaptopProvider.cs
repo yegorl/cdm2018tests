@@ -24,23 +24,16 @@ namespace BD_test.Implementation
         }
         public void AddLaptop(Laptop laptop)
         {
-            //using (LaptopContext db = new LaptopContext())
-            //{
                 try
                 {
                     ctx.Laptops.Add(laptop);
                     ctx.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    logger.Debug(e);
                     throw;
                 }
-            //}
-            catch (Exception e)
-            {
-                logger.Debug(e);
-                throw;
-            }
             
         }
 

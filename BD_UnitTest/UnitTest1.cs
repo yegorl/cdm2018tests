@@ -40,56 +40,6 @@ namespace BD_UnitTest
 
             Assert.IsFalse(result, "1 should not be prime");
         }
-<<<<<<< .mine
-
-        [Test]
-        public void TestGetLaptops()
-        {
-
-            TestLaptopProvider sut = new TestLaptopProvider(mockLaptopContext.Object);
-            var result = sut.GetLaptops();
-            var laptop = new Laptop()
-            {
-                code = 1,
-                model = "",
-                speed = 1,
-                ram = 1,
-                DiscSize = 1,
-                price = 100,
-                screen = 1
-            };
-            laptops.Add(laptop);
-            laptops.Add(laptop);
-            laptops.Add(laptop);
-            Assert.NotNull(result);
-            Assert.Equals(3, result.Count);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 
         [Test]
         public void AddItemToDatabase()
@@ -138,6 +88,5 @@ namespace BD_UnitTest
             Assert.NotNull(result);
             Assert.AreEqual(result, laptop);
         }
->>>>>>> .theirs
     }
 }
